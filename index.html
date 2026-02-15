@@ -211,6 +211,8 @@
         </div>
 
         <nav class="nav-menu">
+            <button class="nav-btn" onclick="switchView('view-app', this)">APP</button>
+            
             <button class="nav-btn active" onclick="switchView('view-home', this)">Project</button>
             <button class="nav-btn" onclick="switchView('view-process', this)">Process</button>
             <button class="nav-btn" onclick="switchView('view-lab', this)">🔴 Live Lab</button>
@@ -226,7 +228,56 @@
             <button id="connectBtn" class="ctrl-btn btn-connect">CONNECT</button>
         </div>
     </header>
+	<div id="view-app" class="view-section">
+        <section class="slide-std" style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, #1a1c20 0%, #000 100%);">
+            
+            <h1 style="font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; margin-bottom: 50px; color: white; text-transform: uppercase;">
+                Scarica la nostra <span style="color: var(--accent-green);">App</span>
+            </h1>
 
+            <a href="InsoletechApp.apk" download style="text-decoration: none;">
+                <button style="
+                    background: transparent; 
+                    color: var(--accent-cyan); 
+                    border: 3px solid var(--accent-cyan); 
+                    padding: 30px 80px; 
+                    font-size: 1.5rem; 
+                    font-weight: 800; 
+                    border-radius: 100px; 
+                    cursor: pointer; 
+                    box-shadow: 0 0 30px rgba(0, 242, 255, 0.2); 
+                    transition: all 0.3s ease;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    margin-bottom: 50px;
+                " 
+                onmouseover="this.style.background='var(--accent-cyan)'; this.style.color='black'; this.style.boxShadow='0 0 60px var(--accent-cyan)';" 
+                onmouseout="this.style.background='transparent'; this.style.color='var(--accent-cyan)'; this.style.boxShadow='0 0 30px rgba(0, 242, 255, 0.2)';">
+                    DOWNLOAD APP
+                </button>
+            </a>
+
+            <div style="background: white; padding: 20px; border-radius: 20px; display: inline-block;">
+                <img id="qr-code-img" src="" alt="QR Code Download" style="width: 200px; height: 200px; display: block;">
+            </div>
+            <p style="margin-top: 20px; color: var(--dim-color); font-size: 1rem; letter-spacing: 1px;">
+                Inquadra il QR Code per scaricare l'APK
+            </p>
+
+        </section>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            // Calcola l'indirizzo del file APK basandosi sull'URL attuale del sito
+            var path = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+            var apkUrl = path + "InsoletechApp.apk";
+            
+            // Genera il QR code usando un'API pubblica
+            var qrApi = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(apkUrl);
+            document.getElementById('qr-code-img').src = qrApi;
+        });
+    </script>
     <div id="view-home" class="view-section active-view">
         <section class="slide-std" style="height: 100vh;">
             <div class="shape-container"><div class="shape shape-blue" style="width: 50vw; height: 150vh; top: -50vh; left: -10vw;"></div><div class="shape shape-green" style="width: 30vw; height: 150vh; top: -50vh; left: 25vw;"></div></div>
@@ -591,3 +642,4 @@
     </script>
 </body>
 </html>
+
